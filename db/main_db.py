@@ -44,14 +44,14 @@ def add_task_db(task):
     conn.close()
     return task_id
 
-def update_task_db(task_id, new_task, completed=None):
+def update_task_db(task_id, new_task=None, completed=None):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     # cursor.execute(queries.UPDATE_TASK, (new_task, task_id))
 
     if new_task is not None:
         cursor.execute("UPDATE tasks SET task = ? WHERE id = ?", (new_task, task_id))
-        
+
     if completed is not None:
         cursor.execute("UPDATE tasks SET completed = ? WHERE id = ?", (completed, task_id))
 
